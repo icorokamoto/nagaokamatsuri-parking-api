@@ -93,7 +93,7 @@ function get_json() {
  */
 function get_parkingStatus() {
 
-	global $config, $places;
+	global $config;
 
 	$result = array(
 		'version'        => $config['version'],
@@ -109,10 +109,10 @@ function get_parkingStatus() {
 		return $result;
 	}
 
-	$html = file_get_contents( $config['url'] );
+	$html_file = file_get_contents( $config['url'] );
 
 	// ファイルの取得に失敗した場合はエラーを返す
-	if( !$html ) {
+	if( !$html_file ) {
 		$result['status'] = 'File Read Error';
 		return $result;
 	}
@@ -142,7 +142,7 @@ function get_parkingStatus() {
 
 	// http://simplehtmldom.sourceforge.net/manual.htm
 	include_once( $config['shd_path'] );
-	$html = str_get_html( $html );
+	$html = str_get_html( $html_file );
 	$rs = $html->find('#traffic_box5 tr');
 
 	//駐車場情報を配列に設定
@@ -179,6 +179,7 @@ function get_parkingStatus() {
 		//updatetime
 		$src = $r->find('td', 0)->plaintext;
 		$regexp = '/\d{2}:\d{2}:\d{2}/';
+		$match = null;
 		preg_match( $regexp, $src, $match );
 		$a['updatetime'] = $match[0];
 
