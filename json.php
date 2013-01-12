@@ -255,7 +255,7 @@ function get_CacheLiteObject() {
 		'lifeTime' => $config['cache_time']
 	);
 	include_once( $config['litephp_path'] );
-	$obj = new Cache_Lite( $options );
+	$obj = new Icoro_Cache_Lite( $options );
 	return $obj;
 }
 
