@@ -74,11 +74,13 @@ function get_json() {
 	if ( !$encoded_data ) {
 		$data = get_parkingStatus();
 		$encoded_data = json_encode( $data );
-		if( $data['status'] == 'OK' ) {
-			$cacheLite->save( $encoded_data, $config['cache_id'] );
-			logging( $data );
-		} else {
-			$encoded_data = $cacheLite->get( $config['cache_id'], 'default', true );
+		if( $data['status'] !== 'NagaokaMatsuriIsOver' ) {
+			if( $data['status'] == 'OK' ) {
+				$cacheLite->save( $encoded_data, $config['cache_id'] );
+				logging( $data );
+			} else {
+				$encoded_data = $cacheLite->get( $config['cache_id'], 'default', true );
+			}
 		}
 	}
 
@@ -105,7 +107,8 @@ function get_parkingStatus() {
 	// 8/4以降はデータの取得を行わない
 	$mktime = mktime( 0, 0, 0, 8, 4,  $config['year'] );
 	if( time() > $mktime ) {
-		$result['status'] = 'Nagaoka Matsuri ' .  $config['year'] . ' is over! See you next year!';
+//		$result['status'] = 'Nagaoka Matsuri ' .  $config['year'] . ' is over! See you next year!';
+		$result['status'] = 'NagaokaMatsuriIsOver';
 		return $result;
 	}
 
