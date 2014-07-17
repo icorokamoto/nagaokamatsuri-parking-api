@@ -9,7 +9,7 @@ $config = array(
 	'cache_dir'    => './cache/',       // cacheディレクトリのpath
 	'cache_time'   => 60*10,            // cacheの有効時間(秒単位)
 	'shd_path'     => './inc/simple_html_dom.php',
-	'year'         => 2013
+	'year'         => 2014
 );
 
 $url[0] = 'http://nagaokamatsuri.com/pnavi';
