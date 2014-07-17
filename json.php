@@ -4,7 +4,7 @@
 date_default_timezone_set('Asia/Tokyo');
 
 $config = array(
-	'version'      => '2013.07.29',
+	'version'      => '2014.07.18',
 	'litephp_path' => './inc/Lite.php', // Lite.phpのpath
 	'cache_dir'    => './cache/',       // cacheディレクトリのpath
 	'cache_time'   => 60*10,            // cacheの有効時間(秒単位)
