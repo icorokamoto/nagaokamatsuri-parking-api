@@ -66,8 +66,10 @@ function get_json() {
 	$cacheLite = get_CacheLiteObject();
 
 	//キャッシュを取得
-	$encoded_data = null;
-//	$encoded_data = $cacheLite->get( $config['cache_id'] );
+	$encoded_data = $cacheLite->get( $config['cache_id'] );
+
+	//動作確認用
+	//$encoded_data = null;
 
 	//キャッシュがない or 期限切れの場合は新たに生成
 	if ( !$encoded_data ) {
