@@ -177,20 +177,22 @@ function get_parkingStatus() {
 
 		// id
 		switch( $a['name'] ) {
-			case '県立近代美術館':     $id = 0; break;
-			case '長岡造形大学':       $id = 1; break;
-			case 'リリックホール':     $id = 2; break;
-			case '国営越後丘陵公園':   $id = 3; break;
-			case '長岡市役所幸町庁舎': $id = 4; break;
-			case '健康センター':       $id = 5; break;
-			case '越路支所':           $id = 6; break;
-			case '越路体育館':         $id = 7; break;
-			case '北部体育館':         $id = 8; break;
-			case '南部工業団地':       $id = 9; break;
-			case '倉敷機械':           $id = 10; break;
-			case '上越マテリアル':     $id = 11; break;
+			case '国営越後丘陵公園':   $id = 1; break;
+			case '越路支所':           $id = 2; break;
+			case '越路体育館':         $id = 3; break;
+			case 'JA越後さんとう':     $id = 4; break;
+			case '南部工業団地':       $id = 5; break;
+			case '倉敷機械':           $id = 6; break;
+			case '北部体育館':         $id = 7; break;
+			case '日本精機':           $id = 8; break;
+			case '第一合繊':           $id = 9; break;
+			case '上越マテリアル用地': $id = 10; break;
 			case '三島支所 他':        $id = 12; break;
-			case '石油資源開発':       $id = 13; break;
+			case '長岡造形大学':       $id = 13; break;
+			case 'リリックホール':     $id = 14; break;
+			case '県立近代美術館':     $id = 15; break;
+			case 'さいわいプラザ':     $id = 16; break;
+			case '旧健康センター':     $id = 17; break;
 		}
 
 		//updatetime
