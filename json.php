@@ -41,18 +41,20 @@ $config['day']      = $day;
 
 $json = get_json();
 
-/*
-echo '<pre>';
-var_dump( json_decode( $json, true ) );
-echo '</pre>';
-*/
-
+//jsonを出力
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=utf-8");
 
 //header("Content-Type: text/javascript; charset=utf-8"); 
 
 echo $json;
+
+//jsonを出力 : 動作確認用
+/* 
+echo '<pre>';
+var_dump( json_decode( $json, true ) );
+echo '</pre>';
+*/
 
 /**
  * jsonデータを生成する
