@@ -10,7 +10,7 @@ class Parking {
 	}
 
 	private function set( $day ) {
-		$url = 'http://www.icoro.com/idea/nagaokamatsuri/2013/json.php';
+		$url = 'http://www.icoro.com/idea/nagaokamatsuri/2014/json.php';
 		if( $day ) $url = $url . '?day=' . $day;
 
 		$json = @file_get_contents( $url );
