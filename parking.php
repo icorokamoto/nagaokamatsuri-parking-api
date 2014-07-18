@@ -26,16 +26,21 @@ class Parking {
 	public function status( $id ) {
 
 		$status_str = '閉鎖中';
-
+		
 /*
 echo '<!--';
 var_dump($this->places);
 echo '-->';
 */
 		if( $place = $this->places[$id] ) {
-			$updatetime = ' (' . substr( $place['updatetime'], 0, 5 ) . ' 現在)';
+		
+			$updatetime_str = '';
 
-			$status_str = $place['status'] . ' ' . $updatetime;
+			if( $place['status'] != '閉鎖中' ) {
+				$updatetime_str = ' (' . substr( $place['updatetime'], 0, 5 ) . ' 現在)';
+			}
+
+			$status_str = $place['status'] . $updatetime_str;
 /*
 			switch ( $place['status'] ) {
 				case 1: $status_str = '<span style="color: green;">空車あり</span>' . $updatetime; break;
