@@ -4,7 +4,7 @@
 date_default_timezone_set('Asia/Tokyo');
 
 $config = array(
-	'version'      => '2014.07.18',
+	'version'      => '2014.08.02',
 	'litephp_path' => './inc/Lite.php', // Lite.phpのpath
 	'cache_dir'    => './cache/',       // cacheディレクトリのpath
 	'cache_time'   => 60*10,            // cacheの有効時間(秒単位)
@@ -154,7 +154,8 @@ function get_parkingStatus() {
 	$time_row = $html->getElementById('pnavi_map')->next_sibling();
 	$src = $time_row->plaintext;
 
-	$regexp = '/\d{2}:\d{2}:\d{2}/';
+//	$regexp = '/\d{2}:\d{2}:\d{2}/';
+	$regexp = '/\d{2}:\d{2}/';
 	preg_match( $regexp, $src, $match );
 	$updatetime = $match[0];
 
