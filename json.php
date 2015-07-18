@@ -189,15 +189,14 @@ function get_parkingStatus() {
 			case '南部工業団地':       $id = 5; break;
 			case '倉敷機械':           $id = 6; break;
 			case '北部体育館':         $id = 7; break;
-			case '日本精機':           $id = 8; break;
-			case '第一合繊':           $id = 9; break;
-			case '上越マテリアル用地': $id = 10; break;
-			case '三島支所 他':        $id = 12; break;
-			case '長岡造形大学':       $id = 13; break;
-			case 'リリックホール':     $id = 14; break;
-			case '県立近代美術館':     $id = 15; break;
-			case 'さいわいプラザ':     $id = 16; break;
-			case '旧健康センター':     $id = 17; break;
+			case '見附駅付近':         $id = 8; break;
+			case '上越マテリアル用地': $id = 9; break;
+			case '三島支所 他':        $id = 10; break;
+			case '長岡造形大学':       $id = 11; break;
+			case 'リリックホール':     $id = 12; break;
+			case '県立近代美術館':     $id = 13; break;
+			case 'さいわいプラザ':     $id = 14; break;
+			case '旧健康センター':     $id = 15; break;
 		}
 
 		//updatetime
