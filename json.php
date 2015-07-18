@@ -4,12 +4,12 @@
 date_default_timezone_set('Asia/Tokyo');
 
 $config = array(
-	'version'      => '2014.08.02',
+	'version'      => '2015.07.18',
 	'litephp_path' => './inc/Lite.php', // Lite.phpのpath
 	'cache_dir'    => './cache/',       // cacheディレクトリのpath
 	'cache_time'   => 60*10,            // cacheの有効時間(秒単位)
 	'shd_path'     => './inc/simple_html_dom.php',
-	'year'         => 2014
+	'year'         => 2015
 );
 
 $url[0] = 'http://nagaokamatsuri.com/pnavi';
