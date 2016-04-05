@@ -12,9 +12,13 @@ $config = array(
 	'year'         => 2015
 );
 
-$url[0] = 'http://nagaokamatsuri.com/pnavi';
-$url[2] = $url[0] . '2.html';
-$url[3] = $url[0] . '3.html';
+//$url[0] = 'http://nagaokamatsuri.com/pnavi';
+//$url[2] = $url[0] . '2.html';
+//$url[3] = $url[0] . '3.html';
+
+// 2015年はトップページに駐車場情報を掲載するっぽい。
+// これに伴い、42行目をコメントアウト。43行目に置き換え。
+$url[0] = 'http://nagaokamatsuri.com/';
 
 //defaultの日付
 $mktime = mktime( 0, 0, 0, 8, 3, $config['year'] );
@@ -35,7 +39,8 @@ if( $day != 2 && $day != 3 ) {
 	$day = $config['default_day'];
 }
 
-$config['url']      = $url[$day];
+//$config['url']      = $url[$day];
+$config['url']      = $url[0];
 $config['cache_id'] = $day;
 $config['day']      = $day;
 
