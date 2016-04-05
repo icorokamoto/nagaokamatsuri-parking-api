@@ -3,6 +3,7 @@
 class Parking {
 
 	private $places;
+	private $updatetime;
 
 	public function __construct( $day = null ) {
 		$day = (int) $day;
@@ -21,6 +22,7 @@ class Parking {
 		if( $array['status'] != 'OK' ) return;
 
 		$this->places = $array['places'];
+		$this->updatetime = $array['updatetime'];
 	}
 	
 	public function status( $id ) {
@@ -36,8 +38,15 @@ echo '-->';
 		
 			$updatetime_str = '';
 
+			// statusが空白だった場合、閉鎖中にする
+			if( $place['status'] == '' ) {
+				$place['status'] = '閉鎖中';
+			}
+
+			// statusが閉鎖中以外だった場合は更新時間を追加する
 			if( $place['status'] != '閉鎖中' ) {
-				$updatetime_str = ' (' . substr( $place['updatetime'], 0, 5 ) . ' 現在)';
+//				$updatetime_str = ' (' . substr( $place['updatetime'], 0, 5 ) . ' 現在)';
+				$updatetime_str = ' (' . $this->updatetime . ' 現在)';
 			}
 
 			$status_str = $place['status'] . $updatetime_str;

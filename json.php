@@ -131,59 +131,37 @@ function get_parkingStatus() {
 	// ページの文字コードをUTF8に変更
 //	$html = mb_convert_encoding( $html, "UTF-8", "SJIS" );
 
-/*
-	//javascript部分からstatusを取得
-	$regexp = '/var marker(?P<id>(\d)+)[\n ]*=.*markerImg(?P<status>\d).*\}\);/sU';
-	preg_match_all( $regexp, $html, $match );
-
-	$array_status = array_combine( $match['id'], $match['status'] );
-	$array_status_str = array();
-
-	foreach( $array_status as $key => $status ) {
-		$status = (int) $status;
-		switch ( $status ) {
-			case 1: $str = '空車あり'; break;
-			case 2: $str = '残りわずか'; break;
-			case 3: $str = '満車'; break;
-			default: $str = '閉';
-		}
-		$array_status_str[$key] = $str;
-	}
-*/
-
+	// HTMLの読み取り開始
 	// http://simplehtmldom.sourceforge.net/manual.htm
 	include_once( $config['shd_path'] );
 	$html = str_get_html( $html );
 	
-	//時刻を取得
-	$time_row = $html->getElementById('pnavi_map')->next_sibling();
-	$src = $time_row->plaintext;
+	// 時刻を取得
+//	$time_row = $html->getElementById('parking_title')->next_sibling();
+//	$src = $time_row->plaintext;
+	$src = trim( h( $html->find('#parking_title', 0)->plaintext ) );
 
 //	$regexp = '/\d{2}:\d{2}:\d{2}/';
 	$regexp = '/\d{2}:\d{2}/';
 	preg_match( $regexp, $src, $match );
-	$updatetime = $match[0];
+//	$updatetime = $match[0];
+	$result['updatetime'] = $match[0];
 
 	//駐車場情報を取得
-	$rs = $html->find('.pnavi_box04 tr');
+//	$rs = $html->find('.pnavi_box04 tr');
+	$rs = $html->find('#parkingbox dl');
 
 	//駐車場情報を配列に設定
 	$array_places = array();
 
 	foreach( $rs as $r ) {
-		// id
-/*
-		$src = $r->find('td a', 0)->getAttribute('href');
-		$regexp = '/ParkingInfo(\d+)\(\);/';
-		preg_match( $regexp, $src, $match );
-		$id = (int) $match[1];
-*/
 
 		// 空白のセルだった場合は飛ばす
-		if(!$r->find('th a', 0)) continue;
+//		if(!$r->find('th a', 0)) continue;
 
 		// name
-		$a['name'] = trim( h( $r->find('th a', 0)->plaintext ) );
+//		$a['name'] = trim( h( $r->find('th a', 0)->plaintext ) );
+		$a['name'] = trim( h( $r->find('dt', 0)->plaintext ) );
 
 		// id
 		switch( $a['name'] ) {
@@ -202,33 +180,15 @@ function get_parkingStatus() {
 			case '県立近代美術館':     $id = 13; break;
 			case 'さいわいプラザ':     $id = 14; break;
 			case '旧健康センター':     $id = 15; break;
+			default: $id = 0;
 		}
 
-		//updatetime
-/*		$src = $r->find('th', 0)->plaintext;
-		$regexp = '/\d{2}:\d{2}:\d{2}/';
-		preg_match( $regexp, $src, $match );
-		$a['updatetime'] = $match[0];
-*/
-		$a['updatetime'] = $updatetime;
+		if( $id != 0 ) {
+			// status_str
+			$a['status'] = trim( h( $r->find('dd', 0)->plaintext ) );
 
-		//status
-//		$a['status'] = (int) $array_status[$id];
-
-		// status_str
-//		$a['status_str'] = $array_status_str[$id];
-		$a['status'] = trim( h( $r->find('td', 0)->plaintext ) );
-
-		//status
-/*
-		switch ( $a['status_str'] ) {
-			case '空車あり':   $a['status'] = 1; break;
-			case '残りわずか': $a['status'] = 2; break;
-			case '満　車':     $a['status'] = 3; break;
-			default:           $a['status'] = 4;
+			$array_places[$id] = $a;
 		}
-*/
-		$array_places[$id] = $a;
 	}
 
 	$result['places'] = $array_places;
@@ -252,13 +212,14 @@ function logging( $data ) {
 
 	if ( $config['day'] != $config['default_day'] ) return false;
 
-	$str = date("Y/m/d H:i:s");
+	$str = date("Y/m/d H:i:s") . ',' . $data['updatetime'];
 
 	foreach( $data['places'] as $p ) {
 		$name   = $p['name'];
 		$status = $p['status'];
-		$time   = $p['updatetime'];
-		$str .= ',' . $name . ',' . $status . ',' . $time;
+//		$time   = $p['updatetime'];
+//		$str .= ',' . $name . ',' . $status . ',' . $time;
+		$str .= ',' . $name . ',' . $status;
 	}
 
 	$str = $str . "\n";
